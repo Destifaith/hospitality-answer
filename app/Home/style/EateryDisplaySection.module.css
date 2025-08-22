@@ -1,0 +1,95 @@
+/* style/EateryDisplaySection.module.css */
+
+.eaterySection {
+  font-family: 'Inter', sans-serif;
+  background-color: #f0fdf4; /* Light green background */
+  padding: 3rem 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.sectionTitle {
+  color: #115e59; /* Darker green text for title */
+  margin-bottom: 2.5rem;
+  font-weight: 800;
+  text-align: center;
+  font-size: 2.5rem;
+  letter-spacing: -0.025em;
+}
+
+.eateryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+  justify-items: center;
+}
+
+.eateryCard {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 380px;
+}
+
+.eateryCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
+}
+
+.eateryImage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.eateryName {
+  color: #2d3748;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.eateryLocation {
+  color: #4a5568;
+  font-size: 1rem;
+}
+
+.eateryDescription {
+  color: #4a5568;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+/* This is the new flex container for the button */
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end; /* Pushes content to the right */
+  align-items: center;
+  margin-top: auto;
+}
+
+.exploreButton {
+  background: linear-gradient(to right, #22c55e, #16a34a); /* Green gradient */
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  box-shadow: 0 4px 10px rgba(34, 197, 94, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.exploreButton:hover {
+  background: linear-gradient(to right, #16a34a, #15803d);
+  box-shadow: 0 6px 15px rgba(34, 197, 94, 0.6);
+  transform: translateY(-2px);
+}
