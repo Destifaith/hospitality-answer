@@ -1,152 +1,206 @@
-"use client";
+"use client"
 
-import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
-import styles from '../style/TourPackages.module.css';
+import type React from "react"
+import { useState, useEffect } from "react"
+import Image from "next/image"
+import styles from "../style/TourPackages.module.css"
 
+// Define the type for a Tour Package object
 interface TourPackage {
-  id: number;
-  name: string;
-  duration: string;
-  price: number;
-  description: string;
-  imageUrl: string;
+  id: number
+  name: string
+  destination: string
+  duration: string
+  price: number
+  rating: number
+  imageUrl: string
+  description: string
+  highlights: string[]
 }
 
+// Tour packages data
 const tourPackages: TourPackage[] = [
   {
     id: 1,
-    name: 'Ghanaian Coastal Escape',
-    duration: '7 Days / 6 Nights',
-    price: 999,
-    description: 'Explore the stunning beaches and historic slave castles along Ghana\'s coast.',
-    imageUrl: 'https://i.natgeofe.com/n/f44f39a2-d5ab-42bb-ba34-242764a0fc94/lionhwange.jpg',
+    name: "Cape Coast Castle Adventure",
+    destination: "Cape Coast, Ghana",
+    duration: "3 Days, 2 Nights",
+    price: 450,
+    rating: 4.9,
+    imageUrl: "/Home/others/cape-coast-castle-tour.png",
+    description: "Explore the historic Cape Coast Castle and learn about Ghana&apos;s rich cultural heritage.",
+    highlights: ["Castle Tour", "Canopy Walk", "Local Cuisine", "Cultural Shows"],
   },
   {
     id: 2,
-    name: 'Northern Ghana Safari',
-    duration: '5 Days / 4 Nights',
-    price: 750,
-    description: 'Adventure through Mole National Park and witness a rich diversity of wildlife.',
-    imageUrl: 'https://i.natgeofe.com/n/f44f39a2-d5ab-42bb-ba34-242764a0fc94/lionhwange.jpg',
+    name: "Kakum National Park Safari",
+    destination: "Kakum, Ghana",
+    duration: "2 Days, 1 Night",
+    price: 320,
+    rating: 4.7,
+    imageUrl: "/Home/others/placeholder-0v60l.png",
+    description: "Experience the breathtaking canopy walkway and diverse wildlife of Kakum National Park.",
+    highlights: ["Canopy Walkway", "Wildlife Spotting", "Nature Trails", "Bird Watching"],
   },
   {
     id: 3,
-    name: 'Accra City & Culture Tour',
-    duration: '3 Days / 2 Nights',
-    price: 450,
-    description: 'Discover the vibrant life, markets, and historical sites of Ghana\'s capital city.',
-    imageUrl: 'https://i.natgeofe.com/n/f44f39a2-d5ab-42bb-ba34-242764a0fc94/lionhwange.jpg',
+    name: "Kumasi Cultural Experience",
+    destination: "Kumasi, Ghana",
+    duration: "4 Days, 3 Nights",
+    price: 580,
+    rating: 4.8,
+    imageUrl: "/Home/others/kumasi-ashanti-palace.png",
+    description: "Immerse yourself in Ashanti culture with visits to palaces, markets, and traditional ceremonies.",
+    highlights: ["Manhyia Palace", "Kejetia Market", "Kente Weaving", "Traditional Ceremonies"],
   },
   {
     id: 4,
-    name: 'Ashanti Kingdom Experience',
-    duration: '4 Days / 3 Nights',
-    price: 600,
-    description: 'Delve into the rich history and traditions of the Ashanti people in Kumasi.',
-    imageUrl: 'https://i.natgeofe.com/n/f44f39a2-d5ab-42bb-ba34-242764a0fc94/lionhwange.jpg',
+    name: "Volta Region Waterfalls Tour",
+    destination: "Volta Region, Ghana",
+    duration: "3 Days, 2 Nights",
+    price: 420,
+    rating: 4.6,
+    imageUrl: "/Home/others/placeholder-330ah.png",
+    description: "Discover the stunning waterfalls and scenic landscapes of the Volta Region.",
+    highlights: ["Wli Waterfalls", "Mount Afadja", "Tafi Monkey Sanctuary", "Local Villages"],
   },
   {
     id: 5,
-    name: 'Volta Region Waterfalls Tour',
-    duration: '2 Days / 1 Night',
-    price: 300,
-    description: 'A quick getaway to hike and swim at the beautiful Wli waterfalls.',
-    imageUrl: 'https://i.natgeofe.com/n/f44f39a2-d5ab-42bb-ba34-242764a0fc94/lionhwange.jpg',
+    name: "Accra City & Beach Combo",
+    destination: "Accra, Ghana",
+    duration: "2 Days, 1 Night",
+    price: 280,
+    rating: 4.5,
+    imageUrl: "/Home/others/accra-beaches-independence-arch-modern.png",
+    description: "Explore Ghana&apos;s vibrant capital city and relax on beautiful coastal beaches.",
+    highlights: ["Independence Arch", "Labadi Beach", "National Museum", "Makola Market"],
   },
   {
     id: 6,
-    name: 'Eco-Tourism in Central Ghana',
-    duration: '6 Days / 5 Nights',
-    price: 850,
-    description: 'Experience sustainable tourism in the heart of Ghana\'s green belt.',
-    imageUrl: 'https://i.natgeofe.com/n/f44f39a2-d5ab-42bb-ba34-242764a0fc94/lionhwange.jpg',
+    name: "Northern Ghana Cultural Safari",
+    destination: "Tamale & Mole, Ghana",
+    duration: "5 Days, 4 Nights",
+    price: 750,
+    rating: 4.9,
+    imageUrl: "/Home/others/mole-elephants-ghana.png",
+    description: "Experience the unique culture and wildlife of Northern Ghana including Mole National Park.",
+    highlights: ["Mole National Park", "Elephant Safari", "Traditional Villages", "Larabanga Mosque"],
   },
-  {
-    id: 7,
-    name: 'Kumasi Craft & Art Tour',
-    duration: '3 Days / 2 Nights',
-    price: 500,
-    description: 'Learn traditional crafts from local artisans in the cultural hub of Kumasi.',
-    imageUrl: 'https://i.natgeofe.com/n/f44f39a2-d5ab-42bb-ba34-242764a0fc94/lionhwange.jpg',
-  },
-  {
-    id: 8,
-    name: 'Accra Nightlife Adventure',
-    duration: '2 Days / 1 Night',
-    price: 250,
-    description: 'A fun-filled tour of Accra\'s best clubs, lounges, and nightlife spots.',
-    imageUrl: 'https://i.natgeofe.com/n/f44f39a2-d5ab-42bb-ba34-242764a0fc94/lionhwange.jpg',
-  },
-];
+]
 
 const TourPackages: React.FC = () => {
-  const [startIndex, setStartIndex] = useState(0);
-  const totalCards = tourPackages.length;
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
 
+  // Auto-slide functionality
   useEffect(() => {
-    const interval = setInterval(() => {
-      setStartIndex((prevIndex) => {
-        // Calculate the next start index, and loop back to 0 if at the end
-        return (prevIndex + 4) % totalCards;
-      });
-    }, 5000);
-    
-    return () => clearInterval(interval);
-  }, [totalCards]);
+    if (!isAutoPlaying) return
 
-  const offset = -startIndex * (100 / 4); // Calculate the transform percentage
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex === tourPackages.length - 1 ? 0 : prevIndex + 1))
+    }, 4000) // Change slide every 4 seconds
+
+    return () => clearInterval(interval)
+  }, [isAutoPlaying])
+
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index)
+  }
+
+  const goToPrevious = () => {
+    setCurrentIndex(currentIndex === 0 ? tourPackages.length - 1 : currentIndex - 1)
+  }
+
+  const goToNext = () => {
+    setCurrentIndex(currentIndex === tourPackages.length - 1 ? 0 : currentIndex + 1)
+  }
 
   return (
-    <section className={styles.tourPackagesSection}>
-      <div className={styles.backgroundOverlay}></div>
-      <Image 
-        src="/Home/tour/beautiful-clouds.jpg" 
-        alt="Beautiful clouds background" 
-        layout="fill"
-        objectFit="cover"
-        quality={100}
-        className={styles.backgroundImage}
-      />
-      
-      <div className={styles.contentWrapper}>
-        <h2 className={styles.sectionTitle}>
-          Popular Tour Packages ✈️
-        </h2>
-        
-        <div className={styles.tourGridWrapper}>
-          <div 
-            className={styles.tourGrid}
-            style={{ transform: `translateX(${offset}%)` }}
-          >
-            {tourPackages.map((tourPackage) => (
-              <div key={tourPackage.id} className={styles.tourCard}>
-                <Image 
-                  src={tourPackage.imageUrl}
-                  alt={tourPackage.name}
-                  className={styles.tourImage}
-                  width={600}
-                  height={400}
-                  priority
-                />
-                <div className="p-6">
-                  <h3 className={styles.tourName}>{tourPackage.name}</h3>
-                  <p className={styles.tourDuration}>{tourPackage.duration}</p>
-                  <p className={styles.tourDescription}>{tourPackage.description}</p>
-                  <div className={styles.priceContainer}>
-                    <span className={styles.tourPrice}>
-                      ${tourPackage.price}
-                    </span>
-                    <button className={styles.viewButton}>View Package</button>
+    <section className={styles.tourSection}>
+      <div className={styles.container}>
+        <h2 className={styles.sectionTitle}>Discover Amazing Tour Packages</h2>
+        <p className={styles.sectionSubtitle}>
+          {/* Explore Ghana's most beautiful destinations with our carefully curated tour packages */}
+          Explore Ghana&apos;s most beautiful destinations with our carefully curated tour packages
+        </p>
+
+        <div
+          className={styles.carousel}
+          onMouseEnter={() => setIsAutoPlaying(false)}
+          onMouseLeave={() => setIsAutoPlaying(true)}
+        >
+          <div className={styles.carouselTrack} style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+            {tourPackages.map((tour) => (
+              <div key={tour.id} className={styles.tourCard}>
+                <div className={styles.imageContainer}>
+                  <Image
+                    src={tour.imageUrl || "/placeholder.svg"}
+                    alt={tour.name}
+                    className={styles.tourImage}
+                    width={600}
+                    height={400}
+                    priority={tour.id <= 2}
+                  />
+                  <div className={styles.ratingBadge}>
+                    <span className={styles.star}>⭐</span>
+                    <span>{tour.rating}</span>
+                  </div>
+                </div>
+
+                <div className={styles.cardContent}>
+                  <h3 className={styles.tourName}>{tour.name}</h3>
+                  <p className={styles.destination}>📍 {tour.destination}</p>
+                  <p className={styles.duration}>🕒 {tour.duration}</p>
+
+                  <p className={styles.description}>{tour.description}</p>
+
+                  <div className={styles.highlights}>
+                    {tour.highlights.slice(0, 3).map((highlight, index) => (
+                      <span key={index} className={styles.highlight}>
+                        {highlight}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className={styles.priceButtonRow}>
+                    <div className={styles.priceContainer}>
+                      <span className={styles.price}>GH₵{tour.price}</span>
+                      <span className={styles.priceLabel}>per person</span>
+                    </div>
+                    <button className={styles.exploreButton}>Explore Package</button>
                   </div>
                 </div>
               </div>
             ))}
           </div>
+
+          {/* Navigation arrows */}
+          <button
+            className={`${styles.navButton} ${styles.prevButton}`}
+            onClick={goToPrevious}
+            aria-label="Previous tour"
+          >
+            ‹
+          </button>
+          <button className={`${styles.navButton} ${styles.nextButton}`} onClick={goToNext} aria-label="Next tour">
+            ›
+          </button>
+
+          {/* Dots indicator */}
+          <div className={styles.dotsContainer}>
+            {tourPackages.map((_, index) => (
+              <button
+                key={index}
+                className={`${styles.dot} ${index === currentIndex ? styles.activeDot : ""}`}
+                onClick={() => goToSlide(index)}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default TourPackages;
+export default TourPackages

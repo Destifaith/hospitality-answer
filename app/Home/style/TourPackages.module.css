@@ -1,132 +1,300 @@
-/* style/TourPackages.module.css */
-
-.tourPackagesSection {
-  position: relative;
-  overflow: hidden;
-  min-height: 600px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.tourSection {
   padding: 4rem 1rem;
-  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  min-height: 100vh;
 }
 
-.backgroundImage {
-  z-index: 1;
-}
-
-.backgroundOverlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  z-index: 2;
-}
-
-.contentWrapper {
-  position: relative;
-  z-index: 3;
-  width: 100%;
+.container {
   max-width: 1200px;
   margin: 0 auto;
-  text-align: center;
 }
 
 .sectionTitle {
-  color: #ffffff;
+  font-size: 3rem;
   font-weight: 800;
-  font-size: 3.5rem;
-  letter-spacing: -0.05em;
+  text-align: center;
+  color: #1a202c;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #2d3748, #4a5568);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.sectionSubtitle {
+  font-size: 1.2rem;
+  text-align: center;
+  color: #64748b;
   margin-bottom: 3rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.tourGridWrapper {
-  overflow: hidden; /* This hides the cards that are off-screen */
-  width: 100%;
+.carousel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
-.tourGrid {
+.carouselTrack {
   display: flex;
-  gap: 2rem;
-  transition: transform 0.8s ease-in-out; /* Smooth transition for the slide */
-  width: 200%; /* The width is set to 200% to accommodate all 8 cards */
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
 }
 
 .tourCard {
-  background-color: rgba(255, 255, 255, 0.95);
-  border-radius: 1rem;
-  box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.2), 0 6px 10px -2px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+  min-width: 100%;
+  background: white;
   display: flex;
-  flex-direction: column;
-  transition: transform 0.3s ease;
-  flex-shrink: 0;
-  width: calc((100% / 4) - 1.5rem); /* Adjust width to fit 4 cards + gaps */
+  align-items: stretch;
+  min-height: 500px;
 }
 
-.tourCard:hover {
-  transform: translateY(-8px);
+.imageContainer {
+  position: relative;
+  flex: 1;
+  min-height: 500px;
 }
 
 .tourImage {
   width: 100%;
-  height: 250px;
+  height: 100%;
   object-fit: cover;
-  border-bottom: 1px solid #e2e8f0;
+}
+
+.ratingBadge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: 600;
+  color: #1a202c;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.star {
+  font-size: 1rem;
+}
+
+.cardContent {
+  flex: 1;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .tourName {
-  color: #2d3748;
+  font-size: 2rem;
   font-weight: 700;
-  font-size: 1.5rem;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.tourDuration {
-  color: #4a5568;
-  font-size: 1.1rem;
-  font-weight: 500;
+  color: #1a202c;
   margin-bottom: 1rem;
+  line-height: 1.2;
 }
 
-.tourDescription {
-  color: #4a5568;
+.destination {
   font-size: 1rem;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.duration {
+  font-size: 1rem;
+  color: #64748b;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.description {
+  font-size: 1.1rem;
+  color: #4a5568;
   line-height: 1.6;
+  margin-bottom: 1.5rem;
   flex-grow: 1;
+}
+
+.highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.highlight {
+  background: #e2e8f0;
+  color: #2d3748;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.priceButtonRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
 }
 
 .priceContainer {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 1.5rem;
+  flex-direction: column;
 }
 
-.tourPrice {
-  color: #1a202c;
-  font-size: 2.25rem;
+.price {
+  font-size: 2rem;
   font-weight: 800;
+  color: #059669;
 }
 
-.viewButton {
-  background: linear-gradient(to right, #4c51bf, #667eea);
+.priceLabel {
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.exploreButton {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
   color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 9999px;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 0.75rem;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  border: none;
-  box-shadow: 0 4px 10px rgba(76, 81, 191, 0.4);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-.viewButton:hover {
-  background: linear-gradient(to right, #3b42a2, #5a67d8);
-  box-shadow: 0 6px 15px rgba(76, 81, 191, 0.6);
+.exploreButton:hover {
   transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+}
+
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border: none;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1a202c;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.navButton:hover {
+  background: white;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.prevButton {
+  left: 1rem;
+}
+
+.nextButton {
+  right: 1rem;
+}
+
+.dotsContainer {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.75rem;
+  z-index: 10;
+}
+
+.dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.activeDot {
+  background: white;
+  transform: scale(1.2);
+}
+
+.dot:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .tourCard {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .imageContainer {
+    min-height: 300px;
+  }
+
+  .cardContent {
+    padding: 1.5rem;
+  }
+
+  .tourName {
+    font-size: 1.5rem;
+  }
+
+  .sectionTitle {
+    font-size: 2rem;
+  }
+
+  .priceButtonRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .exploreButton {
+    width: 100%;
+  }
+
+  .navButton {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tourSection {
+    padding: 2rem 0.5rem;
+  }
+
+  .cardContent {
+    padding: 1rem;
+  }
+
+  .navButton {
+    display: none;
+  }
 }

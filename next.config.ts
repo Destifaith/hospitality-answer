@@ -14,6 +14,7 @@ const nextConfig: NextConfig = {
       'placehold.co',
             'dynamic-media-cdn.tripadvisor.com', // ✅ add this
             'i.natgeofe.com',
+            'images.unsplash.com',
 
     ],
   },
